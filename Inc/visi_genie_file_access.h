@@ -38,6 +38,7 @@ void genieFileAccessIsReady();
 void genieFileDir(char * filename);
 void genieFileRead(char * filename);
 void genieFileWriteStr(char * filename, char * str);
+void genieFileWriteStrToRow(uint8_t row, char * str);
 void genieFileWriteBytes(char * filename, uint8_t * data, uint8_t count);
 void genieFileAppendStr(char * filename, char * str);
 void genieFileAppendBytes(char * filename, uint8_t * data, uint8_t count);
