@@ -77,6 +77,23 @@ void genieFileWriteStr(char * filename, char * str) {
 	}
 }
 
+void genieFileWriteStrToRow(uint8_t row, char * str) {
+	magicFileBusy = true;
+	magicFileBuffer[0] = GENIEM_FILE_WRITE_ROW;
+	magicFileBuffer[1] = row;
+	uint8_t len = 2;
+	//memcpy(magicFileBuffer + len, (uint8_t*)filename, strlen(filename) + 1);
+	//len += strlen(filename) + 1;
+	memcpy(magicFileBuffer + len, str, strlen(str));
+	len += strlen(str);
+
+	genieWriteMagicBytes(magicFileIndex, magicFileBuffer, len);
+
+	while (magicFileBusy == true) {
+		genieDoEvents();
+	}
+}
+
 void genieFileAppendBytes(char * filename, uint8_t * data, uint8_t count) {
 	magicFileBusy = true;
 	magicFileBuffer[0] = GENIEM_FILE_APPEND;
